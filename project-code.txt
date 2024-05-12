@@ -369,3 +369,23 @@ void registerUser() {
         cout << "Passwords do not match. Registration failed.\n";
     }
 }
+// Function to login an existing user
+bool loginUser() {
+    string username, password;
+
+    cout << "Please enter your username: ";
+    cin >> username;
+
+    cout << "Please enter your password: ";
+    cin >> password;
+
+    // Logic to verify username and password from stored data
+    // For simplicity, we'll assume a successful login here
+    return true;
+}
+
+// Function to logout
+void logout() {
+    // For this simple console-based application, logging out just means returning to the login/register screen
+    cout << "Logged out successfully.\n";
+}
