@@ -269,3 +269,73 @@ void placeOrder() {
         }
     }
 };
+
+// Define the ProductManagementSystem class
+class ProductManagementSystem {
+private:
+    Product* products[100];
+    int productCount = 0;
+
+public:
+    // Function to add product (accessible to admin)
+    void addProduct(User& user, int id, string name, string description, int quantity, double price) {
+        if (user.isAdmin) {
+            products[productCount++] = new Product(id, name, description, quantity, price);
+            cout << "Product added successfully!" << endl;
+        } else {
+            cout << "Insufficient privilege to add product." << endl;
+        }
+    }
+
+    // Function to display products
+    void displayProducts() const {
+        cout << "Product List:" << endl;
+        for (int i = 0; i < productCount; ++i) {
+            cout << "ID: " << products[i]->getId() << " | Name: " << products[i]->getName()
+                 << " | Description: " << products[i]->getDescription()
+                 << " | Quantity: " << products[i]->getQuantity() << " | Price: $" << products[i]->getPrice() << endl;
+        }
+    }
+
+    // Function to search products by name
+    void searchProductByName(const string& searchTerm) const {
+        bool found = false;
+        cout << "Search Results:" << endl;
+        for (int i = 0; i < productCount; ++i) {
+            if (products[i]->getName().find(searchTerm) != string::npos) {
+                cout << "ID: " << products[i]->getId() << " | Name: " << products[i]->getName()
+                     << " | Description: " << products[i]->getDescription()
+                     << " | Quantity: " << products[i]->getQuantity() << " | Price: $" << products[i]->getPrice() << endl;
+                found = true;
+            }
+        }
+        if (!found)
+            cout << "No matching products found." << endl;
+    }
+
+    // Function to filter products by price range
+    void filterProductsByPrice(double minPrice, double maxPrice) const {
+        bool found = false;
+        cout << "Filtered Products:" << endl;
+        for (int i = 0; i < productCount; ++i) {
+            if (products[i]->getPrice() >= minPrice && products[i]->getPrice() <= maxPrice) {
+                cout << "ID: " << products[i]->getId() << " | Name: " << products[i]->getName()
+                     << " | Description: " << products[i]->getDescription()
+                     << " | Quantity: " << products[i]->getQuantity() << " | Price: $" << products[i]->getPrice() << endl;
+                found = true;
+            }
+        }
+        if (!found)
+            cout << "No products found in the specified price range." << endl;
+    }
+
+    // Function to get a product by its ID
+    Product* getProductById(int productId) const {
+        for (int i = 0; i < productCount; ++i) {
+            if (products[i]->getId() == productId) {
+                return products[i];
+            }
+        }
+        return nullptr; // Product not found
+    }
+};
