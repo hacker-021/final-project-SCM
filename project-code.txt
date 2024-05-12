@@ -339,3 +339,14 @@ public:
         return nullptr; // Product not found
     }
 };
+
+void writeToFile(const string& username, const string& password) {
+    ofstream writefile(username + ".txt");
+    if (writefile.is_open()) {
+        writefile << password;
+        writefile.close();
+        cout << "User registered successfully!\n";
+    } else {
+        cerr << "Error writing to file.\n";
+    }
+}
