@@ -350,3 +350,22 @@ void writeToFile(const string& username, const string& password) {
         cerr << "Error writing to file.\n";
     }
 }
+// Function to register a new user
+void registerUser() {
+    string username, password, password2;
+
+    cout << "Please enter your username: ";
+    cin >> username;
+
+    cout << "Please enter the password: ";
+    cin >> password;
+
+    cout << "Please re-enter your password: ";
+    cin >> password2;
+
+    if (password == password2) {
+        writeToFile(username, password);
+    } else {
+        cout << "Passwords do not match. Registration failed.\n";
+    }
+}
